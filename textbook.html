@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ଶିକ୍ଷକ ସାଥୀ - Textbooks</title>
     <style>
-        /* === App Variables & Reset === */
         :root {
-            --app-bg: #F2F2F7; /* iOS standard background */
+            --app-bg: #F2F2F7;
             --card-bg: #FFFFFF;
             --text-main: #1C1C1E;
             --text-muted: #8E8E93;
-            --primary-blue: #0284C7; /* Native app blue */
+            --primary-blue: #0284C7;
             --radius-lg: 20px;
             --radius-md: 12px;
             --radius-sm: 8px;
@@ -19,245 +18,677 @@
             --safe-area-pt: env(safe-area-inset-top, 20px);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent; 
-        }
-
-        body {
-            background-color: var(--app-bg);
-            color: var(--text-main);
-            line-height: 1.5;
-            padding-bottom: 40px;
-        }
-
-        /* === App Header === */
-        header {
-            padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px;
-            background: linear-gradient(135deg, #0369A1, #0284C7);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
-        }
-
-        .header-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .app-title {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #FFFFFF;
-        }
-
-        /* Hamburger Button */
-        .hamburger-btn {
-            background: transparent;
-            border: none;
-            color: #FFFFFF;
-            cursor: pointer;
-            padding: 8px;
-            margin-left: -8px; 
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--app-bg); color: var(--text-main); line-height: 1.5; padding-bottom: 40px; }
+        header { padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px; background: linear-gradient(135deg, #0369A1, #0284C7); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); }
+        .header-content { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .app-title { font-size: 24px; font-weight: 800; color: #FFFFFF; }
         
-        .hamburger-btn:active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px 20px; }
+        .textbook-header { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
 
-        /* === Layout === */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px 20px;
-        }
-
-        /* === App Grid === */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .app-grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-                gap: 24px;
-            }
-        }
-
-        /* === App Card / Tile === */
-        .app-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 20px 16px;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: var(--shadow-app);
-            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
-            cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.03);
-            height: 100%;
-        }
-
-        .app-card:active {
-            transform: scale(0.95);
-        }
-
-        /* Icon Container */
-        .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 16px;
-        }
-
-        .bg-blue { background: #E0F2FE; color: #0284C7; }
-
-        /* Card Text */
-        .app-card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 6px;
-            line-height: 1.2;
-        }
-
-        .app-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* === Back Button === */
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--card-bg);
-            color: var(--primary-blue);
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            font-size: 15px;
-            border: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 24px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            text-decoration: none; /* Crucial for anchor tags */
-        }
-        .btn-back:active { transform: scale(0.95); }
-
-        .textbook-header {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--text-main);
-        }
+        .class-section { background: var(--card-bg); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow-app); }
+        .class-header { padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .class-header h3 { font-size: 18px; font-weight: 700; color: var(--text-main); }
+        .icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; background: #E0F2FE; color: #0284C7; }
+        
+        .subject-list { display: none; padding: 16px; background: #fafafa; }
+        .subject-link { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; margin-bottom: 10px; background: #fff; border-radius: var(--radius-sm); color: var(--text-main); text-decoration: none; font-weight: 600; border: 1px solid #eaeaea; box-shadow: 0 1px 3px rgba(0,0,0,0.04); cursor: pointer; transition: 0.2s; }
+        .subject-link:active { transform: scale(0.98); }
+        .download-btn { background: var(--primary-blue); color: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <header>
         <div class="header-content">
-            <button class="hamburger-btn" aria-label="Menu" onclick="alert('Menu clicked - link your sidebar here!')">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
             <h1 class="app-title">ଶିକ୍ଷକ ସାଥୀ</h1>
         </div>
     </header>
 
     <div class="container">
-        
-        <!-- Standard HTML Link to go back to main dashboard -->
-        <a href="index.html" class="btn-back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Dashboard
-        </a>
+        <h2 class="textbook-header">Digital Library</h2>
+        <div id="accordion-container">
 
-        <h2 class="textbook-header">Eduodia Class Library</h2>
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">1️⃣</div>
+                <div>
+                    <h3>Class 1</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
 
-        <div class="app-grid">
-            <a href="YOUR_CLASS_1_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">1️⃣</div>
-                <h3>Class 1</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_2_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">2️⃣</div>
-                <h3>Class 2</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_3_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">3️⃣</div>
-                <h3>Class 3</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_4_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">4️⃣</div>
-                <h3>Class 4</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_5_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">5️⃣</div>
-                <h3>Class 5</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_6_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">6️⃣</div>
-                <h3>Class 6</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_7_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">7️⃣</div>
-                <h3>Class 7</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_8_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">8️⃣</div>
-                <h3>Class 8</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_9_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">9️⃣</div>
-                <h3>Class 9</h3>
-                <p>Study materials & books</p>
-            </a>
-            <a href="YOUR_CLASS_10_DRIVE_LINK" target="_blank" class="app-card">
-                <div class="icon-box bg-blue">🔟</div>
-                <h3>Class 10</h3>
-                <p>Study materials & books</p>
-            </a>
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-1-jhulana-1.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-1-ganita-khela-1.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">2️⃣</div>
+                <div>
+                    <h3>Class 2</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-2-jhulana-2.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-2-maja-majare-ganita-math.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">3️⃣</div>
+                <div>
+                    <h3>Class 3</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-bhasa-mahak.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-pallavi-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-ganita-mela.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-bichitra-pruthibi.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-indradhanu-3.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-3-khela-o-yoga.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">4️⃣</div>
+                <div>
+                    <h3>Class 4</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-bhasa-mahak.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-math-ganita-mela.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-pallavi-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-ama-bichitra-biswa-social-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-indradhanu.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-4-krida-yoga.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">5️⃣</div>
+                <div>
+                    <h3>Class 5</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-bhasha-mahak.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-english-pallavi.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-ganita-mela-math.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-ama-bichitra-biswa.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-khela-yoga.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-5-nabarash.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">6️⃣</div>
+                <div>
+                    <h3>Class 6</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-sahitya-sudha.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-english-jasmine.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-ganita-prakash-math.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-hindi-kalika.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-sanaskruta-kalika-1.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-jingyasha.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-social-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-koshalbodha.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-khela-sahitya.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-6-kalakunja.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">7️⃣</div>
+                <div>
+                    <h3>Class 7</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-odia-sahitya-suman.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-jasmine-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-ganita-prakash.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-hindi-kalika-2.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-sanskruta-kalika-2.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-jingyasha-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-social-science-samajika-bigyan.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-koshalbodha.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-khel-shikhya.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-7-kalakruti.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">8️⃣</div>
+                <div>
+                    <h3>Class 8</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-sahitya-surabhi.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-jasmine-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-math-ganita-praksh.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-hindi-kalika.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-jingyasha-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-kasholabodha.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-kruti.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-sanskruta-kalika.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-social-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-8-urdhu-talash.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">9️⃣</div>
+                <div>
+                    <h3>Class 9</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-odia-sahitya.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-odia-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-english-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-hindi-manjari.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-hindi-byakaran-aur-prayog.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-sanskrit.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-sanskrit-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-algebra.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-geometry.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-physical-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-life-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-history.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-geography.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-vocational-agriculture.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-vocational-automotive.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-vocational-electronics.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-vocational-tourism.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-shikshya-setu-bridge-course.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-9-syllabus.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="class-section">
+            <div class="class-header">
+                <div class="icon-box">🔟</div>
+                <div>
+                    <h3>Class 10</h3>
+                    <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Tap to view subjects</p>
+                </div>
+            </div>
+            <div class="subject-list">
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-odia-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-english.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-english-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-hindi.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-hindi-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-sanskruta-sourav.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-sanskrit-grammar.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-mathematics.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-geometry.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-physical-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-life-science.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-history.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-geography.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-vocational-agriculture.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-vocational-automotive.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-vocational-electronics.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-vocational-tourism.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            <div onclick="secureDownload('https://withteachers.in/uploads/books/class-10-syllabus-2026-27.pdf', '📘.pdf', event)" class="subject-link">
+                <span>📄 📘</span>
+                <button class="download-btn">Download</button>
+            </div>
+
+            </div>
+        </div>
+
         </div>
     </div>
 
+    <script>
+        document.querySelectorAll('.class-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                document.querySelectorAll('.subject-list').forEach(list => {
+                    if(list !== content) list.style.display = 'none';
+                });
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Hidden Downloader
+        async function secureDownload(url, filename, event) {
+            event.preventDefault();
+            const btn = event.currentTarget.querySelector('.download-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "⏳ Downloading...";
+            btn.style.pointerEvents = "none";
+            
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = blobUrl;
+                a.download = filename; 
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                window.URL.revokeObjectURL(blobUrl);
+                document.body.removeChild(a);
+                
+                btn.innerHTML = "✅ Saved";
+                setTimeout(() => { btn.innerHTML = originalText; btn.style.pointerEvents = "auto"; }, 3000);
+
+            } catch (err) {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = url;
+                document.body.appendChild(iframe);
+                
+                btn.innerHTML = "✅ Downloading...";
+                setTimeout(() => { 
+                    btn.innerHTML = originalText; 
+                    btn.style.pointerEvents = "auto"; 
+                    document.body.removeChild(iframe);
+                }, 4000);
+            }
+        }
+    </script>
 </body>
 </html>
