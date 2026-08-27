@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ଶିକ୍ଷକ ସାଥୀ Portal</title>
+    <style>
+        /* === App Variables & Reset === */
+        :root {
+            --app-bg: #F2F2F7; /* iOS standard background */
+            --card-bg: #FFFFFF;
+            --text-main: #1C1C1E;
+            --text-muted: #8E8E93;
+            --primary-blue: #0284C7; /* Native app blue */
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-app: 0 8px 24px rgba(149, 157, 165, 0.1);
+            --safe-area-pt: env(safe-area-inset-top, 20px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* Native app typography */
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Remove blue tap highlight on mobile */
+        }
+
+        body {
+            background-color: var(--app-bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        /* === App Header === */
+        header {
+            padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px;
+            background: linear-gradient(135deg, #0369A1, #0284C7);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #FFFFFF;
+        }
+
+        /* Hamburger Button (Left) */
+        .hamburger-btn {
+            background: transparent;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: -8px; /* Pull slightly left for alignment */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        
+        .hamburger-btn:active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* === Search Bar === */
+        .search-container {
+            padding: 16px 20px 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .search-bar {
+            width: 100%;
+            background: #E5E5EA; /* Native iOS search bar color */
+            border: none;
+            padding: 12px 16px 12px 40px;
+            border-radius: 12px;
+            font-size: 16px;
+            color: var(--text-main);
+            outline: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%238E8E93' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: 12px center;
+            transition: all 0.3s;
+        }
+        .search-bar:focus {
+            background: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--primary-blue);
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+
+        /* === App Grid === */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .app-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 24px;
+            }
+        }
+
+        /* === App Card / Tile === */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: var(--shadow-app);
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+            overflow: hidden;
+            height: 100%;
+        }
+
+        /* Native Tap Effect */
+        .app-card:active {
+            transform: scale(0.95);
+        }
+
+        /* Icon Container */
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* Themed Icon Colors */
+        .bg-blue { background: #E0F2FE; color: #0284C7; }
+        .bg-gold { background: #FEF3C7; color: #D97706; }
+        .bg-indigo { background: #E0E7FF; color: #4F46E5; }
+        .bg-rose { background: #FFE4E6; color: #E11D48; }
+        .bg-teal { background: #CCFBF1; color: #0D9488; }
+        .bg-purple { background: #EDE9FE; color: #7C3AED; }
+        .bg-emerald { background: #D1FAE5; color: #059669; }
+        .bg-pink { background: #FCE7F3; color: #DB2777; }
+        .bg-orange { background: #FFEDD5; color: #EA580C; }
+        .bg-brown { background: #F3E8E0; color: #8B4513; }
+        .bg-slate { background: #E2E8F0; color: #475569; }
+        .bg-cyan { background: #CFFAFE; color: #0891B2; }
+
+        /* Card Text */
+        .app-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .app-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            /* Truncate to 3 lines */
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* === App Badges === */
+        .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+            z-index: 10;
+        }
+
+        .badge-hot { background: linear-gradient(135deg, #F97316, #EA580C); box-shadow: 0 4px 8px rgba(234, 88, 12, 0.3); }
+        .badge-new { background: linear-gradient(135deg, #EF4444, #DC2626); box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3); }
+        .badge-daily { background: linear-gradient(135deg, #8B5CF6, #6D28D9); box-shadow: 0 4px 8px rgba(109, 40, 217, 0.3); }
+        .badge-alert { background: linear-gradient(135deg, #F43F5E, #BE123C); box-shadow: 0 4px 8px rgba(190, 18, 60, 0.3); animation: pulse 2s infinite; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Utility */
+        .hidden { display: none !important; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <!-- Hamburger Menu Button (Left) -->
+            <button class="hamburger-btn" aria-label="Menu" onclick="alert('Menu clicked - link your sidebar here!')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- App Title -->
+            <h1 class="app-title">ଶିକ୍ଷକ ସାଥୀ</h1>
+        </div>
+    </header>
+
+    <!-- Smart Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search tools, links, books..." onkeyup="filterTiles()">
+    </div>
+
+    <div class="container">
+        <!-- MAIN DASHBOARD VIEW -->
+        <div class="app-grid" id="tile-grid">
+
+            <!-- Student Textbooks -->
+            <a href="textbook.html" class="app-card">
+                <div class="icon-box bg-blue">📚</div>
+                <h3>Textbooks</h3>
+                <p>Digital textbooks, syllabus, and study materials (Class 1-10).</p>
+            </a>
+
+            <!-- Textbook Solutions -->
+            <a href="final/index.html" class="app-card">
+                <div class="icon-box bg-teal">💡</div>
+                <h3>Solutions Guide</h3>
+                <p>Comprehensive, step-by-step textbook solutions.</p>
+            </a>
+
+            <!-- Useful Apps -->
+            <a href="usefullapp.html" class="app-card">
+                <div class="icon-box bg-cyan">📱</div>
+                <h3>Useful Apps</h3>
+                <p>Essential educational and departmental Android apps.</p>
+            </a>
+
+            <!-- HIDDEN: Salary Bill 
+            <a href="mrbill.html" class="app-card">
+                <div class="badge badge-hot">Hot</div>
+                <div class="icon-box bg-blue">💸</div>
+                <h3>Salary Bill Gen</h3>
+                <p>Generate and download monthly salary bills securely.</p>
+            </a>
+            -->
+
+            <!-- Student ID -->
+            <a href="id.html" class="app-card">
+                <div class="badge badge-new">New</div>
+                <div class="icon-box bg-gold">🪪</div>
+                <h3>Student ID</h3>
+                <p>Order high-quality, government-style student ID cards.</p>
+            </a>
+
+            <!-- Daily Prayer News -->
+            <a href="news.html" class="app-card">
+                <div class="badge badge-daily">Daily</div>
+                <div class="icon-box bg-indigo">📰</div>
+                <h3>Prayer News</h3>
+                <p>Latest headlines, thought for the day, and current affairs.</p>
+            </a>
+
+            <!-- Sikhya Suchana -->
+            <a href="suchana.html" class="app-card">
+                <div class="badge badge-alert">Alert</div>
+                <div class="icon-box bg-rose">🔔</div>
+                <h3>Sikhya Suchana</h3>
+                <p>Educational notices, circulars, and departmental updates.</p>
+            </a>
+
+            <!-- HRMS & OSEPA Links -->
+            <a href="links.html" class="app-card">
+                <div class="icon-box bg-slate">🌐</div>
+                <h3>HRMS & OSEPA</h3>
+                <p>Direct access to Odisha HRMS, OSEPA, and official teacher portals.</p>
+            </a>
+
+            <!-- Leave App -->
+            <a href="leave.html" class="app-card">
+                <div class="icon-box bg-purple">✍️</div>
+                <h3>Leave Writer</h3>
+                <p>Auto-generate handwritten casual leave applications.</p>
+            </a>
+
+            <!-- Holiday List -->
+            <a href="holiday.html" class="app-card">
+                <div class="icon-box bg-emerald">🗓️</div>
+                <h3>Holiday List</h3>
+                <p>Complete 2026 calendar year schedule for Elementary Schools.</p>
+            </a>
+
+            <!-- Age Calc -->
+            <a href="calculator.html" class="app-card">
+                <div class="icon-box bg-pink">🧮</div>
+                <h3>Age Calculator</h3>
+                <p>Check NEP 2020 admission eligibility for Sishu Vatika/Class 1.</p>
+            </a>
+
+            <!-- Full Forms -->
+            <a href="fullform.html" class="app-card">
+                <div class="icon-box bg-orange">📖</div>
+                <h3>Full Forms</h3>
+                <p>Dictionary of 200+ essential Odisha educational acronyms.</p>
+            </a>
+
+            <!-- OTET -->
+            <a href="otet.html" class="app-card">
+                <div class="icon-box bg-brown">🎓</div>
+                <h3>OTET Schedule</h3>
+                <p>Historical dates and upcoming exam timelines.</p>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        // Instant Search functionality
+        function filterTiles() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.app-card');
+            
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                let desc = card.querySelector('p').innerText.toLowerCase();
+                
+                // Show if input matches title or description
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

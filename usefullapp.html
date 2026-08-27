@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ଶିକ୍ଷକ ସାଥୀ - Useful Apps</title>
+    <style>
+        /* === App Variables & Reset === */
+        :root {
+            --app-bg: #F2F2F7;
+            --card-bg: #FFFFFF;
+            --text-main: #1C1C1E;
+            --text-muted: #8E8E93;
+            --primary-blue: #0284C7;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-app: 0 8px 24px rgba(149, 157, 165, 0.1);
+            --safe-area-pt: env(safe-area-inset-top, 20px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body {
+            background-color: var(--app-bg);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        /* === App Header === */
+        header {
+            padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px;
+            background: linear-gradient(135deg, #0369A1, #0284C7);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #FFFFFF;
+        }
+
+        /* Hamburger Button */
+        .hamburger-btn {
+            background: transparent;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: -8px; 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        
+        .hamburger-btn:active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* === Layout === */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+
+        /* === App Grid === */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .app-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 24px;
+            }
+        }
+
+        /* === App Card / Tile === */
+        .app-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: var(--shadow-app);
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+            height: 100%;
+        }
+
+        .app-card:active {
+            transform: scale(0.95);
+        }
+
+        /* Icon Container */
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* Color classes */
+        .bg-blue { background: #E0F2FE; color: #0284C7; }
+        .bg-teal { background: #CCFBF1; color: #0D9488; }
+        .bg-indigo { background: #E0E7FF; color: #4F46E5; }
+        .bg-orange { background: #FFEDD5; color: #EA580C; }
+        .bg-pink { background: #FCE7F3; color: #DB2777; }
+        .bg-purple { background: #EDE9FE; color: #7C3AED; }
+
+        /* Card Text */
+        .app-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .app-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <button class="hamburger-btn" aria-label="Menu" onclick="alert('Menu clicked - link your sidebar here!')">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <h1 class="app-title">ଶିକ୍ଷକ ସାଥୀ</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-header">Educational & Useful Apps</h2>
+
+        <div class="app-grid">
+            
+            <!-- App 1: Odisha Books -->
+            <a href="https://play.google.com/store/search?q=Odisha+School+Books&c=apps" target="_blank" class="app-card">
+                <div class="icon-box bg-blue">📚</div>
+                <h3>Odisha Books</h3>
+                <p>Access all BSE Odisha board school textbooks digitally in one place.</p>
+            </a>
+
+            <!-- App 2: Odia Kids App -->
+            <a href="https://play.google.com/store/search?q=Odia+Kids+Learning+App&c=apps" target="_blank" class="app-card">
+                <div class="icon-box bg-pink">👦🏽</div>
+                <h3>Odia Kids App</h3>
+                <p>Interactive educational application for learning the Odia language basics.</p>
+            </a>
+
+            <!-- App 3: Nipun Odisha -->
+            <a href="https://play.google.com/store/search?q=Nipun+Odisha&c=apps" target="_blank" class="app-card">
+                <div class="icon-box bg-teal">🎯</div>
+                <h3>Nipun Odisha</h3>
+                <p>Official app for monitoring Foundational Literacy and Numeracy (FLN).</p>
+            </a>
+
+            <!-- App 4: Building Block -->
+            <a href="https://play.google.com/store/search?q=Building+Block+Odisha&c=apps" target="_blank" class="app-card">
+                <div class="icon-box bg-orange">🧱</div>
+                <h3>Building Block</h3>
+                <p>Interactive learning app designed for early childhood education.</p>
+            </a>
+
+            <!-- App 5: Jadu Pedi -->
+            <a href="https://play.google.com/store/search?q=Jadu+Pedi+App&c=apps" target="_blank" class="app-card">
+                <div class="icon-box bg-purple">🪄</div>
+                <h3>Jadu Pedi</h3>
+                <p>Jadui Pitara - Play-based learning resources for the foundational stage.</p>
+            </a>
+
+            <!-- App 6: ChalkLit -->
+            <a href="https://play.google.com/store/apps/details?id=in.chalklit.app" target="_blank" class="app-card">
+                <div class="icon-box bg-blue">📝</div>
+                <h3>ChalkLit</h3>
+                <p>Teacher training, micro-learning courses, and lesson plans platform.</p>
+            </a>
+
+            <!-- App 7: Nishtha (Diksha App) -->
+            <a href="https://play.google.com/store/apps/details?id=in.gov.diksha.app" target="_blank" class="app-card">
+                <div class="icon-box bg-indigo">🌐</div>
+                <h3>Nishtha (DIKSHA)</h3>
+                <p>National platform for school education and teacher training programs.</p>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>

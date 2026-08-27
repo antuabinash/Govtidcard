@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="or">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ଶିକ୍ଷା ସୂଚନା (Fast Education Notices)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Oriya:wght@400;600&display=swap');
+
+        :root {
+            --primary: #0284c7;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Noto Sans Oriya', 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .board {
+            width: 100%;
+            max-width: 650px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .board-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .board-header h2 { margin: 0; font-size: 1.8rem; letter-spacing: 0.5px; }
+        .board-header p { margin: 8px 0 0 0; font-size: 0.95rem; opacity: 0.9; }
+
+        .feed-container {
+            padding: 25px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .loading-text {
+            text-align: center;
+            color: #ea580c;
+            font-weight: bold;
+            padding: 30px;
+            font-style: italic;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+        .notice-card {
+            background-color: #f0f9ff;
+            border-left: 5px solid var(--primary);
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .notice-card:hover { transform: translateX(5px); }
+
+        .notice-title {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--text);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .notice-title:hover { color: var(--primary); }
+
+        .date-stamp { 
+            font-size: 0.85rem; 
+            color: #64748B; 
+            font-weight: bold; 
+            border-top: 1px dashed #cbd5e1; 
+            padding-top: 10px; 
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .source-badge {
+            background: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #475569;
+            font-size: 0.75rem;
+        }
+
+        .feed-container::-webkit-scrollbar { width: 8px; }
+        .feed-container::-webkit-scrollbar-track { background: #f1f5f9; }
+        .feed-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="board">
+        <div class="board-header">
+            <h2>📢 ଶିକ୍ଷା ସୂଚନା</h2>
+            <p>Odisha Education Updates & Notices</p>
+        </div>
+        
+        <div id="feed" class="feed-container">
+            <div class="loading-text">⏳ ସୂଚନା ଲୋଡ୍ ହେଉଛି... (Fast Syncing)</div>
+        </div>
+    </div>
+
+    <script>
+        const CACHE_KEY = "sikhya_suchana_fast";
+        
+        // Set today's date key to refresh the cache daily
+        const todayKey = new Date().toDateString();
+
+        // High-Speed Translation Logic
+        async function translateToOdia(text) {
+            try {
+                const cleanText = text.replace(/<[^>]*>?/gm, '').trim();
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 4000); // 4-second hard limit
+
+                const response = await fetch(
+                    `https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanText)}&langpair=en|or`,
+                    { signal: controller.signal }
+                );
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                return data.responseData?.translatedText || cleanText;
+            } catch(e) {
+                return text; // Instantly fallback to English if the translation network is slow
+            }
+        }
+
+        // Native RSS Fetch (100% Reliable)
+        async function fetchEducationNotices() {
+            const feedContainer = document.getElementById('feed');
+            
+            // 1. Check Local Memory First (Instant Load)
+            const cachedDate = localStorage.getItem(`${CACHE_KEY}_date`);
+            const cachedHTML = localStorage.getItem(CACHE_KEY);
+
+            if (cachedDate === todayKey && cachedHTML) {
+                feedContainer.innerHTML = cachedHTML;
+                return;
+            }
+
+            try {
+                // Using Pragativadi's dedicated Education RSS feed for Odisha School & College updates
+                const targetUrl = 'https://pragativadi.com/category/education/feed/';
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(targetUrl)}`;
+                
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status !== 'ok' || !data.items) throw new Error("Feed error");
+
+                const maxItems = Math.min(10, data.items.length);
+                const itemsToProcess = data.items.slice(0, maxItems);
+
+                // 2. Parallel Translation (Translates all 10 simultaneously)
+                const translationPromises = itemsToProcess.map(async (item) => {
+                    const cleanTitle = item.title.split(' - ')[0].trim();
+                    const odiaTitle = await translateToOdia(cleanTitle);
+                    
+                    // Format the date nicely
+                    const pubDate = new Date(item.pubDate);
+                    const formattedDate = pubDate.toLocaleDateString('en-IN', { 
+                        day: 'numeric', month: 'short', year: 'numeric' 
+                    });
+
+                    return {
+                        title: odiaTitle,
+                        link: item.link,
+                        date: formattedDate,
+                        source: "ପ୍ରଗତିବାଦୀ (Education)"
+                    };
+                });
+
+                const notices = await Promise.all(translationPromises);
+
+                // 3. Render the HTML
+                let html = '';
+                notices.forEach(notice => {
+                    html += `
+                        <div class="notice-card">
+                            <a href="${notice.link}" target="_blank" class="notice-title">
+                                ${notice.title}
+                            </a>
+                            <div class="date-stamp">
+                                <span>${notice.date}</span>
+                                <span class="source-badge">${notice.source}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                feedContainer.innerHTML = html;
+
+                // 4. Save to Cache for 0-second reloads today
+                localStorage.setItem(CACHE_KEY, html);
+                localStorage.setItem(`${CACHE_KEY}_date`, todayKey);
+
+            } catch (error) {
+                console.error(error);
+                if (localStorage.getItem(CACHE_KEY)) {
+                    // Fallback to old cache if network dies completely
+                    feedContainer.innerHTML = localStorage.getItem(CACHE_KEY);
+                } else {
+                    feedContainer.innerHTML = `
+                        <div class="loading-text" style="color: red;">
+                            ❌ ସଂଯୋଗ ତ୍ରୁଟି। ଦୟାକରି ପରେ ଚେଷ୍ଟା କରନ୍ତୁ। (Network Error)
+                        </div>`;
+                }
+            }
+        }
+
+        // Auto-run on load
+        window.addEventListener('DOMContentLoaded', fetchEducationNotices);
+
+    </script>
+</body>
+</html>

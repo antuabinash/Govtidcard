@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odisha Education Abbreviations Reference</title>
+    <style>
+        :root {
+            --primary-orange: #f06511;
+            --primary-blue: #2563EB;
+            --light-blue: #DBEAFE;
+            --bg-color: #F8FAFC;
+            --white: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-gray: #64748B;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        /* Header & Search */
+        header {
+            background-color: var(--primary-orange);
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        header h1 {
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            box-shadow: var(--shadow-md);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .stats {
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        /* Grid / List Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .abbr-badge {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--light-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .category-badge {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .full-form {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 0.5rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            background: var(--white);
+            border-radius: 10px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Odisha Education Abbreviations Reference</h1>
+        <div class="search-container">
+            <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by abbreviation (e.g., OEAR) or full form...">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats" id="resultCount">Showing all abbreviations</div>
+        
+        <div class="grid" id="abbreviationGrid">
+            <!-- Cards will be injected here via JavaScript -->
+        </div>
+
+        <div class="no-results" id="noResults">
+            No abbreviations found matching your search.
+        </div>
+    </div>
+
+    <script>
+        // The embedded JSON data from your Excel file
+        const abbrData = [{"Abbreviation": "NEP", "Category": "NEP & National", "Full Form (English)": "National Education Policy"}, {"Abbreviation": "NCF", "Category": "NEP & National", "Full Form (English)": "National Curriculum Framework"}, {"Abbreviation": "NCF-FS", "Category": "NEP & National", "Full Form (English)": "NCF for Foundational Stage"}, {"Abbreviation": "NCFTE", "Category": "NEP & National", "Full Form (English)": "NCF for Teacher Education"}, {"Abbreviation": "NCF-SE", "Category": "NEP & National", "Full Form (English)": "NCF for School Education"}, {"Abbreviation": "ECCE", "Category": "NEP & National", "Full Form (English)": "Early Childhood Care and Education"}, {"Abbreviation": "FLN", "Category": "NEP & National", "Full Form (English)": "Foundational Literacy and Numeracy"}, {"Abbreviation": "NIPUN", "Category": "NEP & National", "Full Form (English)": "National Initiative for Proficiency in Reading with Understanding and Numeracy"}, {"Abbreviation": "PARAKH", "Category": "NEP & National", "Full Form (English)": "Performance Assessment, Review, and Analysis of Knowledge for Holistic Development"}, {"Abbreviation": "DIKSHA", "Category": "NEP & National", "Full Form (English)": "Digital Infrastructure for Knowledge Sharing"}, {"Abbreviation": "NISHTHA", "Category": "NEP & National", "Full Form (English)": "National Initiative for School Heads' and Teachers' Holistic Advancement"}, {"Abbreviation": "NDEAR", "Category": "NEP & National", "Full Form (English)": "National Digital Education Architecture"}, {"Abbreviation": "ABC", "Category": "NEP & National", "Full Form (English)": "Academic Bank of Credits"}, {"Abbreviation": "NPST", "Category": "NEP & National", "Full Form (English)": "National Professional Standards for Teachers"}, {"Abbreviation": "PTR", "Category": "NEP & National", "Full Form (English)": "Pupil Teacher Ratio"}, {"Abbreviation": "GER", "Category": "NEP & National", "Full Form (English)": "Gross Enrolment Ratio"}, {"Abbreviation": "NER", "Category": "NEP & National", "Full Form (English)": "Net Enrolment Ratio"}, {"Abbreviation": "CWSN", "Category": "NEP & National", "Full Form (English)": "Children With Special Needs"}, {"Abbreviation": "RTE", "Category": "NEP & National", "Full Form (English)": "Right to Education"}, {"Abbreviation": "NAS", "Category": "NEP & National", "Full Form (English)": "National Achievement Survey"}, {"Abbreviation": "SAS", "Category": "NEP & National", "Full Form (English)": "State Achievement Survey"}, {"Abbreviation": "SAFAL", "Category": "NEP & National", "Full Form (English)": "Structured Assessment for Analyzing Learning"}, {"Abbreviation": "UGC", "Category": "NEP & National", "Full Form (English)": "University Grants Commission"}, {"Abbreviation": "AICTE", "Category": "NEP & National", "Full Form (English)": "All India Council for Technical Education"}, {"Abbreviation": "NCERT", "Category": "NEP & National", "Full Form (English)": "National Council of Educational Research and Training"}, {"Abbreviation": "NCTE", "Category": "NEP & National", "Full Form (English)": "National Council for Teacher Education"}, {"Abbreviation": "NIEPA", "Category": "NEP & National", "Full Form (English)": "National Institute of Educational Planning and Administration"}, {"Abbreviation": "CABE", "Category": "NEP & National", "Full Form (English)": "Central Advisory Board of Education"}, {"Abbreviation": "CBSE", "Category": "NEP & National", "Full Form (English)": "Central Board of Secondary Education"}, {"Abbreviation": "ICSE", "Category": "NEP & National", "Full Form (English)": "Indian Certificate of Secondary Education"}, {"Abbreviation": "NIOS", "Category": "NEP & National", "Full Form (English)": "National Institute of Open Schooling"}, {"Abbreviation": "NVS", "Category": "NEP & National", "Full Form (English)": "Navodaya Vidyalaya Samiti"}, {"Abbreviation": "KVS", "Category": "NEP & National", "Full Form (English)": "Kendriya Vidyalaya Sangathan"}, {"Abbreviation": "PM-POSHAN", "Category": "NEP & National", "Full Form (English)": "PM Poshan Shakti Nirman"}, {"Abbreviation": "NVSQ", "Category": "NEP & National", "Full Form (English)": "National Vocational Standards and Qualifications"}, {"Abbreviation": "NCIVE", "Category": "NEP & National", "Full Form (English)": "National Committee for the Integration of Vocational Education"}, {"Abbreviation": "NHEQF", "Category": "NEP & National", "Full Form (English)": "National Higher Education Qualifications Framework"}, {"Abbreviation": "NITI", "Category": "NEP & National", "Full Form (English)": "National Institution for Transforming India"}, {"Abbreviation": "NEAT", "Category": "NEP & National", "Full Form (English)": "National Educational Alliance for Technology"}, {"Abbreviation": "MERU", "Category": "NEP & National", "Full Form (English)": "Multidisciplinary Education and Research Universities"}, {"Abbreviation": "NTS", "Category": "NEP & National", "Full Form (English)": "National Testing Service"}, {"Abbreviation": "SSSA", "Category": "NEP & National", "Full Form (English)": "State School Standards Authority"}, {"Abbreviation": "HECI", "Category": "NEP & National", "Full Form (English)": "Higher Education Commission of India"}, {"Abbreviation": "NHERC", "Category": "NEP & National", "Full Form (English)": "National Higher Education Regulatory Council"}, {"Abbreviation": "SCERT", "Category": "SCERT & Training", "Full Form (English)": "State Council of Educational Research and Training"}, {"Abbreviation": "DIET", "Category": "SCERT & Training", "Full Form (English)": "District Institute of Education and Training"}, {"Abbreviation": "CTE", "Category": "SCERT & Training", "Full Form (English)": "College of Teacher Education"}, {"Abbreviation": "IASE", "Category": "SCERT & Training", "Full Form (English)": "Institute of Advanced Study in Education"}, {"Abbreviation": "BITE", "Category": "SCERT & Training", "Full Form (English)": "Block Institute of Teacher Education"}, {"Abbreviation": "BRCC", "Category": "SCERT & Training", "Full Form (English)": "Block Resource Centre Coordinator"}, {"Abbreviation": "CRCC", "Category": "SCERT & Training", "Full Form (English)": "Cluster Resource Centre Coordinator"}, {"Abbreviation": "ABEO", "Category": "SCERT & Training", "Full Form (English)": "Additional Block Education Officer"}, {"Abbreviation": "BEO", "Category": "SCERT & Training", "Full Form (English)": "Block Education Officer"}, {"Abbreviation": "DEO", "Category": "SCERT & Training", "Full Form (English)": "District Education Officer"}, {"Abbreviation": "DPC", "Category": "SCERT & Training", "Full Form (English)": "District Project Coordinator"}, {"Abbreviation": "SMC", "Category": "SCERT & Training", "Full Form (English)": "School Management Committee"}, {"Abbreviation": "SMDC", "Category": "SCERT & Training", "Full Form (English)": "School Management and Development Committee"}, {"Abbreviation": "PTA", "Category": "SCERT & Training", "Full Form (English)": "Parent Teacher Association"}, {"Abbreviation": "MTA", "Category": "SCERT & Training", "Full Form (English)": "Mother Teacher Association"}, {"Abbreviation": "OPEPA", "Category": "SCERT & Training", "Full Form (English)": "Odisha Primary Education Programme Authority"}, {"Abbreviation": "OMS", "Category": "SCERT & Training", "Full Form (English)": "Odisha Adarsha Vidyalaya Sangathan"}, {"Abbreviation": "TE-SCERT", "Category": "SCERT & Training", "Full Form (English)": "Teacher Education and State Council of Educational Research and Training"}, {"Abbreviation": "DRG", "Category": "SCERT & Training", "Full Form (English)": "District Resource Group"}, {"Abbreviation": "SRG", "Category": "SCERT & Training", "Full Form (English)": "State Resource Group"}, {"Abbreviation": "KRP", "Category": "SCERT & Training", "Full Form (English)": "Key Resource Person"}, {"Abbreviation": "RP", "Category": "SCERT & Training", "Full Form (English)": "Resource Person"}, {"Abbreviation": "MT", "Category": "SCERT & Training", "Full Form (English)": "Master Trainer"}, {"Abbreviation": "INSET", "Category": "SCERT & Training", "Full Form (English)": "In-Service Education for Teachers"}, {"Abbreviation": "PRESET", "Category": "SCERT & Training", "Full Form (English)": "Pre-Service Education for Teachers"}, {"Abbreviation": "CPD", "Category": "SCERT & Training", "Full Form (English)": "Continuous Professional Development"}, {"Abbreviation": "TLM", "Category": "SCERT & Training", "Full Form (English)": "Teaching Learning Material"}, {"Abbreviation": "TLE", "Category": "SCERT & Training", "Full Form (English)": "Teaching Learning Equipment"}, {"Abbreviation": "OSEPA", "Category": "OSEPA Admin", "Full Form (English)": "Odisha School Education Programme Authority"}, {"Abbreviation": "S&ME", "Category": "OSEPA Admin", "Full Form (English)": "School and Mass Education"}, {"Abbreviation": "DSE", "Category": "OSEPA Admin", "Full Form (English)": "Directorate of Secondary Education"}, {"Abbreviation": "DEE", "Category": "OSEPA Admin", "Full Form (English)": "Directorate of Elementary Education"}, {"Abbreviation": "TE", "Category": "OSEPA Admin", "Full Form (English)": "Teacher Education"}, {"Abbreviation": "SSA", "Category": "OSEPA Admin", "Full Form (English)": "Sarva Shiksha Abhiyan"}, {"Abbreviation": "RMSA", "Category": "OSEPA Admin", "Full Form (English)": "Rashtriya Madhyamik Shiksha Abhiyan"}, {"Abbreviation": "SMS", "Category": "OSEPA Admin", "Full Form (English)": "Samagra Shiksha Abhiyan"}, {"Abbreviation": "OAVS", "Category": "OSEPA Admin", "Full Form (English)": "Odisha Adarsha Vidyalaya Sangathan"}, {"Abbreviation": "MDM", "Category": "OSEPA Admin", "Full Form (English)": "Mid-Day Meal"}, {"Abbreviation": "PM-POSHAN-O", "Category": "OSEPA Admin", "Full Form (English)": "Pradhan Mantri Poshan Shakti Nirman Odisha"}, {"Abbreviation": "MoS", "Category": "OSEPA Admin", "Full Form (English)": "Mo School Abhiyan"}, {"Abbreviation": "OEAR", "Category": "OSEPA Admin", "Full Form (English)": "Odisha Educational Activity Register"}, {"Abbreviation": "e-Vidyalaya", "Category": "OSEPA Admin", "Full Form (English)": "Odisha e-Vidyalaya Programme"}, {"Abbreviation": "OEP", "Category": "OSEPA Admin", "Full Form (English)": "Odisha Education Project"}, {"Abbreviation": "SBM", "Category": "OSEPA Admin", "Full Form (English)": "Swachh Bharat Mission (School Level)"}, {"Abbreviation": "SAP", "Category": "OSEPA Admin", "Full Form (English)": "Swachh Vidyalaya Puraskar"}, {"Abbreviation": "VEC", "Category": "OSEPA Admin", "Full Form (English)": "Village Education Committee"}, {"Abbreviation": "PRI", "Category": "OSEPA Admin", "Full Form (English)": "Panchayati Raj Institution"}, {"Abbreviation": "WSHG", "Category": "OSEPA Admin", "Full Form (English)": "Women Self Help Group (in MDM)"}, {"Abbreviation": "ST/SC-Dev", "Category": "OSEPA Admin", "Full Form (English)": "ST & SC Development, Minorities & Backward Classes Welfare Department"}, {"Abbreviation": "SSD", "Category": "OSEPA Admin", "Full Form (English)": "ST & SC Development Schools"}, {"Abbreviation": "OBC", "Category": "OSEPA Admin", "Full Form (English)": "Other Backward Classes"}, {"Abbreviation": "SEBC", "Category": "OSEPA Admin", "Full Form (English)": "Socially and Educationally Backward Classes"}, {"Abbreviation": "BSE", "Category": "BSE & CHSE", "Full Form (English)": "Board of Secondary Education, Odisha"}, {"Abbreviation": "CHSE", "Category": "BSE & CHSE", "Full Form (English)": "Council of Higher Secondary Education, Odisha"}, {"Abbreviation": "HSC", "Category": "BSE & CHSE", "Full Form (English)": "High School Certificate"}, {"Abbreviation": "AHSC", "Category": "BSE & CHSE", "Full Form (English)": "Annual High School Certificate"}, {"Abbreviation": "SHSC", "Category": "BSE & CHSE", "Full Form (English)": "Supplementary High School Certificate"}, {"Abbreviation": "Madhyama", "Category": "BSE & CHSE", "Full Form (English)": "Sanskrit High School Certificate"}, {"Abbreviation": "SOSC", "Category": "BSE & CHSE", "Full Form (English)": "State Open School Certificate"}, {"Abbreviation": "OTET", "Category": "BSE & CHSE", "Full Form (English)": "Odisha Teacher Eligibility Test"}, {"Abbreviation": "OSSTET", "Category": "BSE & CHSE", "Full Form (English)": "Odisha Secondary School Teacher Eligibility Test"}, {"Abbreviation": "PMST", "Category": "BSE & CHSE", "Full Form (English)": "Pathani Samanta Mathematics Scholarship Test"}, {"Abbreviation": "NRTS", "Category": "BSE & CHSE", "Full Form (English)": "National Rural Talent Scholarship Test"}, {"Abbreviation": "NMMS", "Category": "BSE & CHSE", "Full Form (English)": "National Means-cum-Merit Scholarship"}, {"Abbreviation": "NTSE", "Category": "BSE & CHSE", "Full Form (English)": "National Talent Search Examination"}, {"Abbreviation": "CCE", "Category": "BSE & CHSE", "Full Form (English)": "Continuous and Comprehensive Evaluation"}, {"Abbreviation": "FA", "Category": "BSE & CHSE", "Full Form (English)": "Formative Assessment"}, {"Abbreviation": "SA", "Category": "BSE & CHSE", "Full Form (English)": "Summative Assessment"}, {"Abbreviation": "OAS", "Category": "BSE & CHSE", "Full Form (English)": "Odisha Administrative Service"}, {"Abbreviation": "OES", "Category": "BSE & CHSE", "Full Form (English)": "Odisha Education Service"}, {"Abbreviation": "D.El.Ed", "Category": "Teacher Education", "Full Form (English)": "Diploma in Elementary Education"}, {"Abbreviation": "B.Ed", "Category": "Teacher Education", "Full Form (English)": "Bachelor of Education"}, {"Abbreviation": "M.Ed", "Category": "Teacher Education", "Full Form (English)": "Master of Education"}, {"Abbreviation": "B.P.Ed", "Category": "Teacher Education", "Full Form (English)": "Bachelor of Physical Education"}, {"Abbreviation": "C.P.Ed", "Category": "Teacher Education", "Full Form (English)": "Certificate in Physical Education"}, {"Abbreviation": "D.P.E", "Category": "Teacher Education", "Full Form (English)": "Diploma in Physical Education"}, {"Abbreviation": "CT", "Category": "Teacher Education", "Full Form (English)": "Certificate Course in Teaching (Old D.El.Ed)"}, {"Abbreviation": "B.H.Ed", "Category": "Teacher Education", "Full Form (English)": "Bachelor of Hindi Education"}, {"Abbreviation": "TGT", "Category": "Teacher Education", "Full Form (English)": "Trained Graduate Teacher"}, {"Abbreviation": "PGT", "Category": "Teacher Education", "Full Form (English)": "Post Graduate Teacher"}, {"Abbreviation": "PRT", "Category": "Teacher Education", "Full Form (English)": "Primary Teacher"}, {"Abbreviation": "PET", "Category": "Teacher Education", "Full Form (English)": "Physical Education Teacher"}, {"Abbreviation": "SS", "Category": "Teacher Education", "Full Form (English)": "Sikshya Sahayak (Old)"}, {"Abbreviation": "JTC", "Category": "Teacher Education", "Full Form (English)": "Junior Teacher (Contractual)"}, {"Abbreviation": "JT", "Category": "Teacher Education", "Full Form (English)": "Junior Teacher"}, {"Abbreviation": "RHT", "Category": "Teacher Education", "Full Form (English)": "Regular High School Teacher"}, {"Abbreviation": "CHT", "Category": "Teacher Education", "Full Form (English)": "Contractual High School Teacher (Old)"}, {"Abbreviation": "HM", "Category": "Teacher Education", "Full Form (English)": "Head Master"}, {"Abbreviation": "AHM", "Category": "Teacher Education", "Full Form (English)": "Assistant Head Master"}, {"Abbreviation": "CR", "Category": "Teacher Education", "Full Form (English)": "Confidential Report"}, {"Abbreviation": "PAR", "Category": "Teacher Education", "Full Form (English)": "Performance Appraisal Report"}, {"Abbreviation": "EL", "Category": "Teacher Education", "Full Form (English)": "Earned Leave"}, {"Abbreviation": "CL", "Category": "Teacher Education", "Full Form (English)": "Casual Leave"}, {"Abbreviation": "ML", "Category": "Teacher Education", "Full Form (English)": "Maternity Leave / Medical Leave"}, {"Abbreviation": "IEP", "Category": "Inclusive Education", "Full Form (English)": "Individualized Education Program"}, {"Abbreviation": "VI", "Category": "Inclusive Education", "Full Form (English)": "Visual Impairment"}, {"Abbreviation": "HI", "Category": "Inclusive Education", "Full Form (English)": "Hearing Impairment"}, {"Abbreviation": "MR", "Category": "Inclusive Education", "Full Form (English)": "Mental Retardation (Intellectual Disability)"}, {"Abbreviation": "LD", "Category": "Inclusive Education", "Full Form (English)": "Learning Disability"}, {"Abbreviation": "CP", "Category": "Inclusive Education", "Full Form (English)": "Cerebral Palsy"}, {"Abbreviation": "ASD", "Category": "Inclusive Education", "Full Form (English)": "Autism Spectrum Disorder"}, {"Abbreviation": "MD", "Category": "Inclusive Education", "Full Form (English)": "Multiple Disabilities"}, {"Abbreviation": "SLD", "Category": "Inclusive Education", "Full Form (English)": "Specific Learning Disability"}, {"Abbreviation": "RPwD", "Category": "Inclusive Education", "Full Form (English)": "Rights of Persons with Disabilities Act"}, {"Abbreviation": "ALM", "Category": "Inclusive Education", "Full Form (English)": "Active Learning Methodology"}, {"Abbreviation": "UDL", "Category": "Inclusive Education", "Full Form (English)": "Universal Design for Learning"}, {"Abbreviation": "ICT", "Category": "EdTech", "Full Form (English)": "Information and Communication Technology"}, {"Abbreviation": "U-DISE", "Category": "EdTech", "Full Form (English)": "Unified District Information System for Education"}, {"Abbreviation": "U-DISE+", "Category": "EdTech", "Full Form (English)": "Unified District Information System for Education Plus"}, {"Abbreviation": "SDMIS", "Category": "EdTech", "Full Form (English)": "Student Data Management Information System"}, {"Abbreviation": "e-Prastuti", "Category": "EdTech", "Full Form (English)": "Odisha Govt. Portal for e-Learning"}, {"Abbreviation": "e-Bidyalaya", "Category": "EdTech", "Full Form (English)": "Odisha's ICT in Schools Scheme"}, {"Abbreviation": "OER", "Category": "EdTech", "Full Form (English)": "Open Educational Resources"}, {"Abbreviation": "MOOC", "Category": "EdTech", "Full Form (English)": "Massive Open Online Course"}, {"Abbreviation": "SWAYAM", "Category": "EdTech", "Full Form (English)": "Study Webs of Active-Learning for Young Aspiring Minds"}, {"Abbreviation": "CAL", "Category": "EdTech", "Full Form (English)": "Computer Aided Learning"}, {"Abbreviation": "CBA", "Category": "EdTech", "Full Form (English)": "Computer Based Assessment"}, {"Abbreviation": "LMS", "Category": "EdTech", "Full Form (English)": "Learning Management System"}, {"Abbreviation": "PFMS", "Category": "Samagra & Schemes", "Full Form (English)": "Public Financial Management System"}, {"Abbreviation": "SNA", "Category": "Samagra & Schemes", "Full Form (English)": "Single Nodal Agency"}, {"Abbreviation": "ZSS", "Category": "Samagra & Schemes", "Full Form (English)": "Zilla Swasthya Samiti"}, {"Abbreviation": "RBSK", "Category": "Samagra & Schemes", "Full Form (English)": "Rashtriya Bal Swasthya Karyakram"}, {"Abbreviation": "WIFS", "Category": "Samagra & Schemes", "Full Form (English)": "Weekly Iron and Folic Acid Supplementation"}, {"Abbreviation": "KGBV", "Category": "Samagra & Schemes", "Full Form (English)": "Kasturba Gandhi Balika Vidyalaya"}, {"Abbreviation": "OAV", "Category": "Samagra & Schemes", "Full Form (English)": "Odisha Adarsha Vidyalaya"}, {"Abbreviation": "EMRS", "Category": "Samagra & Schemes", "Full Form (English)": "Eklavya Model Residential School"}, {"Abbreviation": "DBT", "Category": "Samagra & Schemes", "Full Form (English)": "Direct Benefit Transfer"}, {"Abbreviation": "KBY", "Category": "Samagra & Schemes", "Full Form (English)": "Kalia Bidyarthi Yojana"}, {"Abbreviation": "MGNREGS", "Category": "Samagra & Schemes", "Full Form (English)": "Mahatma Gandhi National Rural Employment Guarantee Scheme (School Infrastructure)"}, {"Abbreviation": "AWW", "Category": "Samagra & Schemes", "Full Form (English)": "Anganwadi Worker"}, {"Abbreviation": "KPI", "Category": "Statistics", "Full Form (English)": "Key Performance Indicator"}, {"Abbreviation": "PGI", "Category": "Statistics", "Full Form (English)": "Performance Grading Index"}, {"Abbreviation": "SEQI", "Category": "Statistics", "Full Form (English)": "School Education Quality Index"}, {"Abbreviation": "GPI", "Category": "Statistics", "Full Form (English)": "Gender Parity Index"}, {"Abbreviation": "AER", "Category": "Statistics", "Full Form (English)": "Age-specific Enrolment Ratio"}, {"Abbreviation": "OOSC", "Category": "Statistics", "Full Form (English)": "Out Of School Children"}, {"Abbreviation": "CBE", "Category": "Pedagogy & General", "Full Form (English)": "Competency Based Education"}, {"Abbreviation": "EBL", "Category": "Pedagogy & General", "Full Form (English)": "Experiential Based Learning"}, {"Abbreviation": "PBL", "Category": "Pedagogy & General", "Full Form (English)": "Project Based Learning / Problem Based Learning"}, {"Abbreviation": "LO", "Category": "Pedagogy & General", "Full Form (English)": "Learning Outcome"}, {"Abbreviation": "AIL", "Category": "Pedagogy & General", "Full Form (English)": "Art Integrated Learning"}, {"Abbreviation": "SIL", "Category": "Pedagogy & General", "Full Form (English)": "Sports Integrated Learning"}, {"Abbreviation": "STEM", "Category": "Pedagogy & General", "Full Form (English)": "Science, Technology, Engineering, and Mathematics"}, {"Abbreviation": "STEAM", "Category": "Pedagogy & General", "Full Form (English)": "Science, Technology, Engineering, Arts, and Mathematics"}, {"Abbreviation": "IQ", "Category": "Pedagogy & General", "Full Form (English)": "Intelligence Quotient"}, {"Abbreviation": "EQ", "Category": "Pedagogy & General", "Full Form (English)": "Emotional Quotient"}, {"Abbreviation": "SQ", "Category": "Pedagogy & General", "Full Form (English)": "Social Quotient"}, {"Abbreviation": "21CS", "Category": "Pedagogy & General", "Full Form (English)": "21st Century Skills"}];
+
+        const grid = document.getElementById('abbreviationGrid');
+        const searchInput = document.getElementById('searchInput');
+        const resultCount = document.getElementById('resultCount');
+        const noResults = document.getElementById('noResults');
+
+        // Function to render the cards
+        function renderCards(data) {
+            grid.innerHTML = ''; // Clear current grid
+            
+            if (data.length === 0) {
+                noResults.style.display = 'block';
+                resultCount.textContent = '0 results found';
+                return;
+            } else {
+                noResults.style.display = 'none';
+                resultCount.textContent = `Showing ${data.length} abbreviation${data.length !== 1 ? 's' : ''}`;
+            }
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="abbr-badge">${item.Abbreviation || 'N/A'}</span>
+                        <span class="category-badge">${item.Category || 'General'}</span>
+                    </div>
+                    <div class="full-form">${item['Full Form (English)'] || 'N/A'}</div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Initial render of all data
+        renderCards(abbrData);
+
+        // Search Filter Logic
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            const filteredData = abbrData.filter(item => {
+                const abbr = (item.Abbreviation || '').toLowerCase();
+                const fullForm = (item['Full Form (English)'] || '').toLowerCase();
+                const category = (item.Category || '').toLowerCase();
+                
+                // Check if the search term exists in any of the fields
+                return abbr.includes(searchTerm) || 
+                       fullForm.includes(searchTerm) || 
+                       category.includes(searchTerm);
+            });
+            
+            renderCards(filteredData);
+        });
+    </script>
+</body>
+</html>

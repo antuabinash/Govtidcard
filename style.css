@@ -1,0 +1,549 @@
+/* =========================================================
+   GOVSCHOOL PORTAL — MATCHING INDEX PAGE THEME
+   ========================================================= */
+
+:root {
+    --primary-blue: #1E3A8A;
+    --primary-blue-dark: #172A6B;
+    --primary-gold: #F59E0B;
+    --primary-gold-dark: #D97706;
+
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+
+    --answer-bg: #EFF6FF;
+    --answer-border: #2563EB;
+
+    --border-color: #E5E7EB;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.10);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.10);
+
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 0;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+
+/* =========================================================
+   HEADER / TITLE
+   ========================================================= */
+
+h1,
+h2 {
+    color: var(--primary-blue);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+h3,
+h4 {
+    color: var(--text-dark);
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--primary-gold);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+/* =========================================================
+   NAVIGATION / BACK BUTTON
+   ========================================================= */
+
+.nav-bar {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.nav-bar a:hover {
+    color: var(--primary-gold-dark);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    background: transparent;
+    color: var(--primary-blue);
+
+    padding: 0.6rem 1rem;
+
+    border: 2px solid var(--primary-blue);
+    border-radius: 6px;
+
+    margin-bottom: 1.5rem;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.btn-back:hover {
+    background: var(--primary-blue);
+    color: #fff;
+    transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   MAIN CONTENT CARD
+   ========================================================= */
+
+.qa-container {
+    background: var(--card-bg);
+
+    padding: 2.5rem;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow-sm);
+
+    margin-top: 1.5rem;
+
+    border-top: 5px solid var(--primary-blue);
+}
+
+
+/* =========================================================
+   QUESTION / CONTENT
+   ========================================================= */
+
+.qa-container p,
+.qa-container h3,
+.qa-container h4 {
+    margin-bottom: 0.75rem;
+}
+
+.qa-container h3 {
+    color: var(--primary-blue);
+    font-size: 1.15rem;
+}
+
+.qa-container h4 {
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   ANSWER BOX
+   ========================================================= */
+
+.answer-box {
+    background: var(--answer-bg);
+
+    border-left: 5px solid var(--answer-border);
+
+    padding: 1.25rem 1.5rem;
+
+    border-radius: 0 8px 8px 0;
+
+    margin: 1rem 0 1.5rem;
+
+    box-shadow: var(--shadow-sm);
+
+    color: var(--text-dark);
+}
+
+
+/* =========================================================
+   LISTS
+   ========================================================= */
+
+.answer-box ul,
+.answer-box ol {
+    margin: 0.75rem 0 0 1.5rem;
+    padding: 0;
+}
+
+.answer-box li {
+    margin-bottom: 0.5rem;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+    display: inline-block;
+
+    padding: 0.7rem 1.4rem;
+
+    background-color: var(--primary-blue);
+    color: #fff;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+    text-align: center;
+
+    transition: var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--primary-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   GOLD BUTTON
+   ========================================================= */
+
+.btn-gold {
+    background-color: var(--primary-gold);
+    color: var(--text-dark);
+}
+
+.btn-gold:hover {
+    background-color: var(--primary-gold-dark);
+    color: #fff;
+}
+
+
+/* =========================================================
+   CARD GRID
+   ========================================================= */
+
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 1.5rem;
+
+    margin-top: 1.5rem;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+    background: var(--card-bg);
+
+    padding: 2rem;
+
+    border-radius: var(--radius);
+
+    text-decoration: none;
+    color: var(--text-dark);
+
+    font-size: 1.05rem;
+    font-weight: 600;
+
+    text-align: center;
+
+    box-shadow: var(--shadow-sm);
+
+    border-top: 5px solid var(--primary-blue);
+
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow-lg);
+
+    border-top-color: var(--primary-gold);
+
+    color: var(--primary-blue);
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 0.9rem;
+    text-align: left;
+}
+
+td {
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tr:hover td {
+    background: #F8FAFC;
+}
+
+
+/* =========================================================
+   INPUTS / SELECTS / TEXTAREAS
+   ========================================================= */
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    padding: 0.75rem 0.9rem;
+
+    border: 1px solid #D1D5DB;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    color: var(--text-dark);
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+
+    border-color: var(--primary-blue);
+
+    box-shadow:
+        0 0 0 3px rgba(30, 58, 138, 0.12);
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+label {
+    display: block;
+
+    margin-bottom: 0.4rem;
+
+    color: var(--text-dark);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+
+/* =========================================================
+   ALERT / INFO BOX
+   ========================================================= */
+
+.info-box {
+    background: #EFF6FF;
+
+    border-left: 5px solid var(--primary-blue);
+
+    padding: 1rem 1.25rem;
+
+    border-radius: 0 8px 8px 0;
+
+    margin: 1rem 0;
+}
+
+.warning-box {
+    background: #FFFBEB;
+
+    border-left: 5px solid var(--primary-gold);
+
+    padding: 1rem 1.25rem;
+
+    border-radius: 0 8px 8px 0;
+
+    margin: 1rem 0;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge {
+    display: inline-block;
+
+    padding: 4px 10px;
+
+    border-radius: 20px;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+}
+
+.badge-blue {
+    background: #DBEAFE;
+    color: var(--primary-blue);
+}
+
+.badge-gold {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        margin: 1rem auto;
+        padding: 0 0.75rem;
+    }
+
+    .qa-container {
+        padding: 1.25rem;
+        border-top-width: 4px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th,
+    td {
+        padding: 0.65rem;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    body {
+        font-size: 0.95rem;
+    }
+
+    .container {
+        padding: 0 0.6rem;
+    }
+
+    .qa-container {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .btn-back {
+        width: auto;
+    }
+}

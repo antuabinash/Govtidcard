@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Study Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body oncontextmenu="return false;" onselectstart="return false;" ondragstart="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;">
+    <header>
+        <div class="header-content">
+            <button class="hamburger-btn" aria-label="Menu">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <h1 class="app-title">ଶିକ୍ଷକ ସାଥୀ Portal</h1>
+        </div>
+    </header>
+    <div class="container">
+        <h2 class="textbook-header">1️⃣
+Class 1
+ପ୍ରଥମ ଶ୍ରେଣୀ Subjects</h2>
+        <div class="app-grid"><a href="class_1_ganita_khela.html" class="app-card">
+                    <div class="icon-box bg-indigo">📖</div>
+                    <h3>🔢
+ଗଣିତ ଖେଳ
+Open</h3>
+                    <p>Open chapters for 🔢
+ଗଣିତ ଖେଳ
+Open</p>
+                </a></div>
+    </div>
+    
+    <script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    
+    // Extra JS safeguard against right-click inspect and copying
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('copy', event => event.preventDefault());
+    </script>
+    
+</body>
+</html>
