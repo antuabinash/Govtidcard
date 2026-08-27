@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,
+        initial-scale=1.0,
+        maximum-scale=1.0,
+        user-scalable=no"
+    >
+
+    <title>ଶିକ୍ଷକ ସାଥୀ</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body
+    oncontextmenu="return false;"
+    onselectstart="return false;"
+    ondragstart="return false;"
+    oncopy="return false;"
+    oncut="return false;"
+    onpaste="return false;"
+>
+
+
+<!-- ========================================================
+     UNIVERSAL TOOLBAR
+
+     NO HAMBURGER
+     NO PORTAL
+     ======================================================== -->
+
+<header>
+
+    <div class="header-content">
+
+        <h1 class="app-title">
+            ଶିକ୍ଷକ ସାଥୀ
+        </h1>
+
+    </div>
+
+</header>
+
+
+
+<div class="search-container">
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search-bar"
+        placeholder="Search..."
+        onkeyup="filterTiles()"
+    >
+
+</div>
+
+
+
+<div class="container">
+
+    
+<div class="location-ref">
+
+    <div class="location-breadcrumb">
+        Home ❯ Class 10 ❯ Sanskruta ❯ Chapter 7
+    </div>
+
+</div>
+
+
+    
+<div class="app-grid">
+
+
+<a
+    href="class_10_sanskruta_ch7_study.html"
+    class="app-card"
+>
+
+    <div
+        class="badge badge-hot"
+        style="background:#0284C7;"
+    >
+        Read
+    </div>
+
+    <div class="icon-box bg-cyan">
+        📖
+    </div>
+
+    <h3>
+        Study Material
+    </h3>
+
+    <p>
+        Tap to open
+    </p>
+
+</a>
+
+
+<a
+    href="class_10_sanskruta_ch7_qa.html"
+    class="app-card"
+>
+
+    <div class="badge badge-hot">
+        Hot
+    </div>
+
+    <div class="icon-box bg-teal">
+        💡
+    </div>
+
+    <h3>
+        Book Q & A
+    </h3>
+
+    <p>
+        Tap to open
+    </p>
+
+</a>
+
+
+<a
+    href="class_10_sanskruta_ch7_add.html"
+    class="app-card"
+>
+
+    <div
+        class="badge badge-hot"
+        style="background:#8B5CF6;"
+    >
+        Extra
+    </div>
+
+    <div class="icon-box bg-purple">
+        📋
+    </div>
+
+    <h3>
+        Additional Qs
+    </h3>
+
+    <p>
+        Tap to open
+    </p>
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+function filterTiles() {
+
+    let input =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(
+            ".app-card"
+        );
+
+    cards.forEach(card => {
+
+        let titleElement =
+            card.querySelector("h3");
+
+        let descElement =
+            card.querySelector("p");
+
+        let title =
+            titleElement
+            ? titleElement.innerText.toLowerCase()
+            : "";
+
+        let desc =
+            descElement
+            ? descElement.innerText.toLowerCase()
+            : "";
+
+        if (
+            title.includes(input) ||
+            desc.includes(input)
+        ) {
+
+            card.style.display =
+                "flex";
+
+        } else {
+
+            card.style.display =
+                "none";
+        }
+
+    });
+
+}
+
+
+document.addEventListener(
+    "contextmenu",
+    event => event.preventDefault()
+);
+
+
+document.addEventListener(
+    "copy",
+    event => event.preventDefault()
+);
+
+</script>
+
+
+
+</body>
+
+</html>
