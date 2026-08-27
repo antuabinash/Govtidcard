@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ଶିକ୍ଷକ ସାଥୀ - Textbooks</title>
     <style>
-        /* === Modern Variables === */
+        /* Modern Variables */
         :root {
-            --app-bg: #F0F2F5; /* Softer, modern background */
+            --app-bg: #F0F2F5;
             --card-bg: #FFFFFF;
             --text-main: #1C1C1E;
             --text-muted: #6B7280;
-            --primary-blue: #2563EB; /* Modern vibrant blue */
+            --primary-blue: #2563EB;
             --primary-hover: #1D4ED8;
             --radius-lg: 20px;
             --radius-md: 16px;
@@ -24,130 +24,38 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background-color: var(--app-bg); color: var(--text-main); line-height: 1.5; padding-bottom: 60px; }
         
-        /* === App Header === */
-        header { 
-            padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px; 
-            background: linear-gradient(135deg, #1E40AF, #3B82F6); 
-            position: sticky; top: 0; z-index: 100; 
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2); 
-        }
+        header { padding: calc(var(--safe-area-pt) + 16px) 24px 16px 24px; background: linear-gradient(135deg, #1E40AF, #3B82F6); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2); }
         .header-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
         .app-title { font-size: 24px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
         .textbook-header { font-size: 22px; font-weight: 800; margin-bottom: 24px; color: #111827; }
 
-        /* === Expandable Class Sections === */
-        .class-section { 
-            background: var(--card-bg); 
-            border-radius: var(--radius-lg); 
-            margin-bottom: 20px; 
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(229, 231, 235, 0.8);
-            transition: box-shadow 0.3s;
-        }
+        .class-section { background: var(--card-bg); border-radius: var(--radius-lg); margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(229, 231, 235, 0.8); transition: box-shadow 0.3s; }
         .class-section:hover { box-shadow: var(--shadow-md); }
         
-        .class-header { 
-            padding: 20px; display: flex; align-items: center; gap: 16px; 
-            cursor: pointer; background: transparent; 
-        }
+        .class-header { padding: 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; background: transparent; }
         .class-header h3 { font-size: 19px; font-weight: 700; color: #111827; }
         .class-header p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
-        .icon-box { 
-            width: 56px; height: 56px; border-radius: 16px; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 26px; background: #DBEAFE; color: var(--primary-blue); 
-        }
+        .icon-box { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; background: #DBEAFE; color: var(--primary-blue); }
         
-        /* Modern Chevron Icon */
-        .chevron {
-            margin-left: auto; width: 24px; height: 24px;
-            color: #9CA3AF; transition: transform 0.3s ease;
-        }
+        .chevron { margin-left: auto; width: 24px; height: 24px; color: #9CA3AF; transition: transform 0.3s ease; }
         .class-section.active .chevron { transform: rotate(180deg); }
 
-        /* === The New Grid View for Subjects === */
-        .subject-grid { 
-            display: none; /* Hidden by default */
-            padding: 0 20px 24px 20px; 
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
-            gap: 16px; 
-            border-top: 1px solid rgba(229, 231, 235, 0.5);
-            margin-top: 8px;
-            padding-top: 24px;
-        }
-        
-        .class-section.active .subject-grid { display: grid; } /* Shows grid when active */
+        .subject-grid { display: none; padding: 0 20px 24px 20px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; border-top: 1px solid rgba(229, 231, 235, 0.5); margin-top: 8px; padding-top: 24px; }
+        .class-section.active .subject-grid { display: grid; }
 
-        /* Individual Book Cards */
-        .subject-card { 
-            background: #F8FAFC; 
-            border-radius: var(--radius-md); 
-            padding: 20px; 
-            text-decoration: none; 
-            border: 1px solid #E2E8F0; 
-            display: flex; flex-direction: column; justify-content: space-between;
-            transition: all 0.2s ease; cursor: pointer;
-            height: 100%;
-        }
-        .subject-card:hover, .subject-card:active { 
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1); 
-            border-color: #BFDBFE;
-            background: #FFFFFF;
-        }
+        /* Modified subject card for standard anchor tags */
+        .subject-card { background: #F8FAFC; border-radius: var(--radius-md); padding: 20px; text-decoration: none; border: 1px solid #E2E8F0; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s ease; cursor: pointer; height: 100%; }
+        .subject-card:hover, .subject-card:active { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1); border-color: #BFDBFE; background: #FFFFFF; }
         
-        .subject-card-title { 
-            font-size: 16px; font-weight: 700; color: #1E293B; 
-            display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
-            margin-bottom: 16px;
-        }
+        .subject-card-title { font-size: 16px; font-weight: 700; color: #1E293B; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; margin-bottom: 16px; }
         .book-icon { font-size: 20px; }
         
-        .read-btn { 
-            background: var(--primary-blue); color: white; 
-            padding: 10px 16px; border-radius: var(--radius-sm); 
-            font-size: 14px; font-weight: 600; border: none; cursor: pointer; 
-            display: flex; justify-content: center; align-items: center; gap: 8px;
-            width: 100%; transition: background 0.2s;
-        }
+        .read-btn { background: var(--primary-blue); color: white; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; border: none; display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; transition: background 0.2s; }
         .subject-card:hover .read-btn { background: var(--primary-hover); }
 
-        /* === Fullscreen PDF Modal Styles (with Download) === */
-        #pdf-modal {
-            display: none; position: fixed; top: 0; left: 0; 
-            width: 100%; height: 100%; background: #0F172A; 
-            z-index: 1000; flex-direction: column;
-        }
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 24px; background: #1E293B; color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        .modal-title { font-size: 18px; font-weight: 600; flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 16px;}
-        
-        .modal-actions { display: flex; gap: 12px; align-items: center; }
-        
-        .download-action-btn {
-            background: #10B981; color: white; text-decoration: none;
-            padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px;
-            display: flex; align-items: center; gap: 6px; transition: 0.2s;
-        }
-        .download-action-btn:active { opacity: 0.8; transform: scale(0.95); }
-        
-        .close-btn {
-            background: #EF4444; color: white; border: none; 
-            padding: 8px 16px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px; 
-            cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px;
-        }
-        .close-btn:active { opacity: 0.8; transform: scale(0.95); }
-        
-        #pdf-iframe { width: 100%; height: 100%; border: none; flex-grow: 1; background: #E2E8F0; }
-
         @media (max-width: 600px) {
-            .modal-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-            .modal-actions { width: 100%; justify-content: space-between; }
             .class-header { padding: 16px; }
             .icon-box { width: 48px; height: 48px; font-size: 22px; }
         }
@@ -162,10 +70,9 @@
 
     <div class="container">
         <h2 class="textbook-header">Digital Library</h2>
-        
         <div id="accordion-container">
 
-            <!-- CLASS 1 -->
+            <!-- Class 1 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">1️⃣</div>
@@ -176,18 +83,18 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-1-ganita-khela-1.pdf', 'Ganita Khela 1', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Khela 1</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-1-jhulana-1.pdf', 'Jhulana 1', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Jhulana 1</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1-Pyo5zq_BiY8XdxWOm5jZpvF1PWDozJ8/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jhulana 1</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TfVIn1cs5RkadciTvjlzypXDe3h89S-t/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Khela</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 2 -->
+            <!-- Class 2 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">2️⃣</div>
@@ -198,18 +105,18 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-2-maja-majare-ganita-math.pdf', 'Maja Majare Ganita Math', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Maja Majare Ganita Math</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-2-jhulana-2.pdf', 'Jhulana 2', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Jhulana 2</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1snXWubi_xeuL_qvs-Ak4CteB8M8zDH8T/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jhulana</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1S9iiS_Mo1zwDetRzgsi3AGyT9SBwYNrv/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Khela</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 3 -->
+            <!-- Class 3 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">3️⃣</div>
@@ -220,34 +127,34 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-pallavi-english.pdf', 'Pallavi English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> Pallavi English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-khela-o-yoga.pdf', 'Khela O Yoga', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏀</span> Khela O Yoga</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-bhasa-mahak.pdf', 'Bhasa Mahak', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Bhasa Mahak</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-bichitra-pruthibi.pdf', 'Bichitra Pruthibi', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Bichitra Pruthibi</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-ganita-mela.pdf', 'Ganita Mela', event)" class="subject-card">
+                    <a href="https://drive.google.com/file/d/1ux0_2nFKKmYOd-DMhK7rn0pvuguqlNKH/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bhasa Mahaka</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IG6kgulTYnvA7f3JDOcOL6ZaxFkKK6rN/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Pallavi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1upN-a8QmvvJPhvwT1tA6v-i-MYofPAQ_/view" target="_blank" class="subject-card">
                         <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Mela</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-3-indradhanu-3.pdf', 'Indradhanu 3', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌈</span> Indradhanu 3</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ynSy0BYYfe0y4COUpE168WaCSnmvf6wJ/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bichitra Ama Pruthibi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cOdCqUILDWFhg8u49XI174n0ercwFQ-l/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Indradhanu</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XLIEAZXGR82ptn-7cLRqtay-56ET6dkd/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Yoga</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 4 -->
+            <!-- Class 4 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">4️⃣</div>
@@ -258,34 +165,34 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-pallavi-english.pdf', 'Pallavi English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> Pallavi English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-bhasa-mahak.pdf', 'Bhasa Mahak', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Bhasa Mahak</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-krida-yoga.pdf', 'Krida Yoga', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏀</span> Krida Yoga</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-indradhanu.pdf', 'Indradhanu', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌈</span> Indradhanu</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-math-ganita-mela.pdf', 'Math Ganita Mela', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Math Ganita Mela</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-4-ama-bichitra-biswa-social-science.pdf', 'Ama Bichitra Biswa Social Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Ama Bichitra Biswa</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/19AKcxRtfY13D1fAp6wtY-E66ZY5Soitu/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bhasa Mahaka</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z9uVcG5D_6oQmX3bTRmKo_1J7EDjyhtZ/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Pallavi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dAT1F6Zsc8OHaQBx-b-4vT0ufWlyZxBn/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Mela</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18ID6GeU7g15cldh1alhhW5mKHR-zZQhq/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ama Bichitra Biswa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hYuVPwWV8xm7YmF7gvN-jjmcpu6IdXLk/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Indradhanu</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_2yKXwG2oUd9e9iS1WKznrWjJNQUK9wt/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Yoga</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 5 -->
+            <!-- Class 5 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">5️⃣</div>
@@ -296,34 +203,34 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-ganita-mela-math.pdf', 'Ganita Mela Math', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Mela Math</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-khela-yoga.pdf', 'Khela Yoga', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏀</span> Khela Yoga</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-nabarash.pdf', 'Nabarash', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Nabarash</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-bhasha-mahak.pdf', 'Bhasha Mahak', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Bhasha Mahak</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-english-pallavi.pdf', 'English Pallavi', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English Pallavi</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-5-ama-bichitra-biswa.pdf', 'Ama Bichitra Biswa', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Ama Bichitra Biswa</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1sXuNx_kBiv2TBjN8XhId2oDUqwAomyYn/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bhasa Mahaka</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ncD7P08gu38ZePA-UVeFDLGFOCZBru3P/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Pallavi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1U3Yx5n6Ljq6HaCNX3IGCahA_P8HBXFPk/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Mela</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fFC9-Bg9FGKb9XG2MPPIqo4FvRGT5c3K/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ama Bichitra Biswa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RvtbXvw-FKfpd0eaQkI7r2TtuOMSliXv/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Nabarasa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y7_q82vtReo_rXyIOZlNGOJgsHg9KjFy/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Yoga</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 6 -->
+            <!-- Class 6 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">6️⃣</div>
@@ -334,50 +241,50 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-social-science.pdf', 'Social Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Social Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-jingyasha.pdf', 'Jingyasha', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🔬</span> Jingyasha</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-english-jasmine.pdf', 'English Jasmine', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English Jasmine</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-kalakunja.pdf', 'Kalakunja', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🎨</span> Kalakunja</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-sahitya-sudha.pdf', 'Sahitya Sudha', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Sahitya Sudha</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-khela-sahitya.pdf', 'Khela Sahitya', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">⚽</span> Khela Sahitya</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-koshalbodha.pdf', 'Koshalbodha', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧠</span> Koshalbodha</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-ganita-prakash-math.pdf', 'Ganita Prakash Math', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Prakash Math</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-sanaskruta-kalika-1.pdf', 'Sanaskruta Kalika 1', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanaskruta Kalika 1</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-6-hindi-kalika.pdf', 'Hindi Kalika', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Kalika</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1i07TFhhag5LRCOWamWnoyrcwlOrRq4Rv/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sahitya Sudha</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uP7yq-_mTD7WP3sUw8p399XhZV3bElzN/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jasmine</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/164bpsHb73BA_tkPgPJdfHWymvvDcLpyz/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganit Prakash</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PeruW6kHIka_hs_hlCpuM-skfjISBUY1/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jigyansa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KlrswtulLCKEzQQSJgZPaDpIokMOXPF3/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bharat o Ama Pruthibi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pgz_psu9jUIXtzsgCGwlCeqPI059VHB8/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13M-alsgzMRtfKys0Gin772ARzg4E3kel/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sltjQQXJGheY8RayHv6_OE8DuhGeJng8/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Kalakunj</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15bQjdafCj8k-nlTi4S6J9DNgWb2GLsuU/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Koushal Bodh</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1b35-s2Tp4Rgug7f7W2cWTyF2dJY1KGG6/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Sikhya</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 7 -->
+            <!-- Class 7 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">7️⃣</div>
@@ -388,50 +295,50 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-jingyasha-science.pdf', 'Jingyasha Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🔬</span> Jingyasha Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-kalakruti.pdf', 'Kalakruti', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🎨</span> Kalakruti</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-odia-sahitya-suman.pdf', 'Odia Sahitya Suman', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Odia Sahitya Suman</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-khel-shikhya.pdf', 'Khel Shikhya', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏃</span> Khel Shikhya</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-jasmine-english.pdf', 'Jasmine English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> Jasmine English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-hindi-kalika-2.pdf', 'Hindi Kalika 2', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Kalika 2</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-ganita-prakash.pdf', 'Ganita Prakash', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganita Prakash</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-koshalbodha.pdf', 'Koshalbodha', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧠</span> Koshalbodha</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-sanskruta-kalika-2.pdf', 'Sanskruta Kalika 2', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskruta Kalika 2</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-7-social-science-samajika-bigyan.pdf', 'Social Science Samajika Bigyan', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Samajika Bigyan</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1coviHL0u4vmTI0G5KhrSTYTPVTjfCeya/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sahitya Suman</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mfrW6YJ2-wd6esLRgMZmIQtKDM9oqWnC/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jasmine</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SbWUeAVt3h2p-4ydpW-IH0nFk796XfC4/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganit Prakash</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T4mMoKON7SNzxkV5gQ1kNmYRm2WiO1CE/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jigyansa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JoVhmviY6eVJ4WUc6urGVDGInhJZUIpy/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bharat o Ama Pruthibi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cUB1DAvWdNYew8d3P1e4wIjmJWAKQxOW/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1d7xjv8OIL8V8ba3O_wWta_HOaGOYvZKh/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1znnBx9tZrk6gKz_WaHmDOM5j-J8Vny5O/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Kalakruti</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eVexqbLgDNcyZB0zrvNl9nI-5j1MVuyy/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Koushal Bodh</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PIKKZsGpMtKtHwSZ_bOZtLdq4c0AA1OC/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Sikhya</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 8 -->
+            <!-- Class 8 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">8️⃣</div>
@@ -442,50 +349,50 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-sanskruta-kalika.pdf', 'Sanskruta Kalika', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskruta Kalika</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-jasmine-english.pdf', 'Jasmine English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> Jasmine English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-kruti.pdf', 'Kruti', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🎨</span> Kruti</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-social-science.pdf', 'Social Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌍</span> Social Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-urdhu-talash.pdf', 'Urdhu Talash', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📖</span> Urdhu Talash</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-math-ganita-praksh.pdf', 'Math Ganita Praksh', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Math Ganita Praksh</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-sahitya-surabhi.pdf', 'Sahitya Surabhi', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Sahitya Surabhi</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-kasholabodha.pdf', 'Kasholabodha', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧠</span> Kasholabodha</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-hindi-kalika.pdf', 'Hindi Kalika', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Kalika</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-8-jingyasha-science.pdf', 'Jingyasha Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🔬</span> Jingyasha Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/15wOcjqQgNY8K7M7oB3TjXSZ_sq3kK78X/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sahitya Surabhi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/188QFOG8tqiI2CImPXX8LUdPJSxynQzIu/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jasmine</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/155m3NkNx077Tz8FyQJZv-m-sTjf-HjLU/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Ganit Prakash</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Buos3xyhZtMFbFxGT8o5ewg1yfWi02Np/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Jigyansa</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e6EM-wPVd8sHTDKtsWQ3DU9GfapLYYvz/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Bharat o Ama Pruthibi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZkV--SjX0xtbKsSHbyiYYWsr8vy9EFgh/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IMqB23KKWgEc_EtbGBJ5X-6Bvh4_U_h2/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit Kalika</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IG-437wWNiMqUWQ2s6yEHSAiG4xToie5/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Kruti</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K4M-id1IKNMi3-34BhIkiDWwwF4VUnCD/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Koushal Bodh</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1U70kfQl5wZgVpj7SlEixldZbiplpFRHX/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Khel Sikhya</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 9 -->
+            <!-- Class 9 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">9️⃣</div>
@@ -496,90 +403,66 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-sanskrit-grammar.pdf', 'Sanskrit Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskrit Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-geography.pdf', 'Geography', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🗺️</span> Geography</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-hindi-byakaran-aur-prayog.pdf', 'Hindi Byakaran Aur Prayog', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Byakaran</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-hindi-manjari.pdf', 'Hindi Manjari', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Manjari</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-vocational-tourism.pdf', 'Vocational Tourism', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">✈️</span> Vocational Tourism</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-physical-science.pdf', 'Physical Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧪</span> Physical Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-algebra.pdf', 'Algebra', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">➗</span> Algebra</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-vocational-agriculture.pdf', 'Vocational Agriculture', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌾</span> Vocational Agriculture</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-english-grammar.pdf', 'English Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-vocational-electronics.pdf', 'Vocational Electronics', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">⚡</span> Vocational Electronics</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-english.pdf', 'English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-history.pdf', 'History', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏛️</span> History</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-life-science.pdf', 'Life Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧬</span> Life Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-shikshya-setu-bridge-course.pdf', 'Shikshya Setu Bridge Course', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌉</span> Bridge Course</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-odia-grammar.pdf', 'Odia Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Odia Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-syllabus.pdf', 'Syllabus', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📋</span> Syllabus</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-sanskrit.pdf', 'Sanskrit', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskrit</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-vocational-automotive.pdf', 'Vocational Automotive', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🚗</span> Vocational Automotive</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-odia-sahitya.pdf', 'Odia Sahitya', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Odia Sahitya</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-9-geometry.pdf', 'Geometry', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📐</span> Geometry</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1GWFkTcpYInf6nFeO3X6ijP3Ukfw-tf45/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sahitya Dhara</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GRB6uOuV4wd2y2WdzRT6K8hdQeQc7HZU/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Odia Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FiKqEpf4C6KEZ7RmjEC0O4XcRThOI1uu/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> English</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FeVzfqVhW6JCjmolmlRFOcLnFIJDsHtw/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> English Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FuwXHEeAs7W7m01flCdRVGvgcP_VrG9T/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G2KwYIFKsNj2FE_zXnO4yYK1g5GjK7bz/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GNP4d5ZKG4w6VFw_kEab-IwDMS8Oj-qn/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GMyruzhtMJyCj9mAlJmxoBtr9I2nQQyt/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fl_3XLSbCjIxMnT7I0W1kTUsgnjE4Rne/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Algebra</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fzsc96m7_dNwGGvJo81Tk-09UFo9KVdD/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Geometry</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GR7rFVSm4_hRSrWJBFAM9DZ8YSrej8b5/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Physical Science</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G-Wo4L8bN5VzfrW5MG2WW1LJ_vjKW_Ps/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Life Science</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G1_VAhj0KTYU9DWaM9nYJ0vMsTkJelJJ/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> History</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FXIkIrYwB8_Rwj2d1FYo0idftKY4PhVV/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Geography</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
-            <!-- CLASS 10 -->
+            <!-- Class 10 -->
             <div class="class-section">
                 <div class="class-header">
                     <div class="icon-box">🔟</div>
@@ -590,150 +473,83 @@
                     <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="subject-grid">
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-geometry.pdf', 'Geometry', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📐</span> Geometry</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-physical-science.pdf', 'Physical Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧪</span> Physical Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-geography.pdf', 'Geography', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🗺️</span> Geography</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-vocational-agriculture.pdf', 'Vocational Agriculture', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🌾</span> Vocational Agriculture</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-vocational-tourism.pdf', 'Vocational Tourism', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">✈️</span> Vocational Tourism</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-sanskrit-grammar.pdf', 'Sanskrit Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskrit Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-odia-grammar.pdf', 'Odia Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📙</span> Odia Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-hindi.pdf', 'Hindi', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-english-grammar.pdf', 'English Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-vocational-automotive.pdf', 'Vocational Automotive', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🚗</span> Vocational Automotive</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-english.pdf', 'English', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📗</span> English</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-life-science.pdf', 'Life Science', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🧬</span> Life Science</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-.pdf', 'Textbook', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📘</span> Textbook</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-history.pdf', 'History', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">🏛️</span> History</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-hindi-grammar.pdf', 'Hindi Grammar', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📕</span> Hindi Grammar</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-mathematics.pdf', 'Mathematics', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">➗</span> Mathematics</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-sanskruta-sourav.pdf', 'Sanskruta Sourav', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📜</span> Sanskruta Sourav</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-vocational-electronics.pdf', 'Vocational Electronics', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">⚡</span> Vocational Electronics</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
-                    <div onclick="openPDF('https://withteachers.in/uploads/books/class-10-syllabus-2026-27.pdf', 'Syllabus 2026 27', event)" class="subject-card">
-                        <div class="subject-card-title"><span class="book-icon">📋</span> Syllabus 2026 27</div>
-                        <button class="read-btn">Read PDF</button>
-                    </div>
+                    <a href="https://drive.google.com/file/d/1BE6czLwMB7vXDy_y-fAS576qCT3nRyLi/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sahitya Sindhu</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BcWbQzn493MQptHVVlUbI-yFEvPiTFp5/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Odia Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B-3gul84xLXX64QWAJxgt26tnQB9m9RA/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> English</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AmA6WKrWf5dkjuKhEoi87a5SH6bnKz0C/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> English Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B4PzMuPsH7Qsjqqw0QtsPNtQ8sTr1eUz/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B4EEPeoywiHgXvrILGpOaqO3UfPhN2v7/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Hindi Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BTQ7oiwz0Jgqe2zaAnb0BSBCvKoQ11YS/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BQYKIbFmc6BFOhaS8bxpZg8SwiwGi6j1/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Sanskrit Grammar</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B-JtmrsYwrcdy4dNOKidCv4GSB9UfXye/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Algebra</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BDAY8-ceZZOpdm-xaocy3rhCSJy_RMzL/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Geometry</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BYj7aUbYHcjTIfIyUiGhCgVT3vznaUe5/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Physical Science</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BEvnAtu_mnjln6WApSS_ghCF5_eg0ztp/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Life Science</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BM5QqN1bJc_YYUlvXelXoTkFBwtfHP9U/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> History</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AfkHGMTimJOHe94oNCzs4uUxZmPgBJK6/view" target="_blank" class="subject-card">
+                        <div class="subject-card-title"><span class="book-icon">📘</span> Geography</div>
+                        <div class="read-btn">Open PDF</div>
+                    </a>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- The Hidden PDF Reader with Download Option -->
-    <div id="pdf-modal">
-        <div class="modal-header">
-            <div class="modal-title" id="modal-book-title">Reading Book...</div>
-            <div class="modal-actions">
-                <!-- Direct Download Button built into the Modal -->
-                <a id="modal-download-btn" href="#" target="_blank" class="download-action-btn" download>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:-2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    Download
-                </a>
-                <button class="close-btn" onclick="closePDF()">✖ Close</button>
-            </div>
-        </div>
-        <iframe id="pdf-iframe" src=""></iframe>
-    </div>
-
     <script>
-        // Updated Toggle Script for Modern Grid View & Arrow Animation
+        // Simple Accordion Logic
         document.querySelectorAll('.class-header').forEach(header => {
             header.addEventListener('click', () => {
                 const parentSection = header.parentElement;
                 
-                // Close all other sections first for a clean accordian feel
+                // Close all others
                 document.querySelectorAll('.class-section').forEach(section => {
-                    if (section !== parentSection) {
-                        section.classList.remove('active');
-                    }
+                    if (section !== parentSection) section.classList.remove('active');
                 });
                 
-                // Toggle the current section
+                // Toggle clicked section
                 parentSection.classList.toggle('active');
             });
         });
-
-        // Function to open PDF inside the website iframe
-        function openPDF(url, title, event) {
-            event.preventDefault();
-            
-            // Set the dynamic title
-            document.getElementById('modal-book-title').innerText = title;
-            
-            // Render the iframe source to display the PDF
-            document.getElementById('pdf-iframe').src = url;
-            
-            // Set up the Download button in the top right corner
-            const downloadBtn = document.getElementById('modal-download-btn');
-            downloadBtn.href = url;
-            downloadBtn.download = title + '.pdf';
-            
-            // Display the fullscreen reader modal
-            document.getElementById('pdf-modal').style.display = 'flex';
-            
-            // Prevent scrolling on the main page while reading
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Function to close the PDF reader safely
-        function closePDF() {
-            document.getElementById('pdf-modal').style.display = 'none';
-            document.getElementById('pdf-iframe').src = ""; 
-            document.body.style.overflow = 'auto'; 
-        }
     </script>
 </body>
 </html>
